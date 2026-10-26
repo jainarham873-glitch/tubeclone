@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="no-referrer" />
+    <meta name="theme-color" content="#0f0f0f" />
+    <title>Sign in — Tubeclone</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="auth-page.css" />
+  </head>
+  <body class="auth-screen" data-auth-page="login">
+    <header class="auth-header"><a class="brand" href="index.html" aria-label="Tubeclone home"><span class="brand__mark"><span></span></span><span>TUBECLONE</span></a><a href="index.html">← Back to watching</a></header>
+    <main class="auth-workspace">
+      <aside class="auth-story"><span class="auth-eyebrow">YOUR CORNER OF THE INTERNET</span><h1>Good to<br />have you <em>back.</em></h1><p>Your favorite creators, your saved discoveries, your next big idea. All in one place.</p><div class="auth-art" aria-hidden="true"><span class="auth-art__play">▶</span><span class="auth-art__tag">Made for your next chapter.</span></div><span class="auth-story__footer">WATCH. CREATE. BELONG.</span></aside>
+      <section class="auth-card" aria-labelledby="auth-title">
+        <span class="auth-eyebrow">YOUR TUBECLONE ACCOUNT</span><h2 id="auth-title">Welcome back</h2><p id="auth-description" class="auth-description">Sign in to pick up where you left off.</p>
+        <p id="auth-message" class="auth-message" role="status" tabindex="-1" hidden></p>
+        <div id="auth-session" class="auth-session" hidden><span class="auth-success-icon" aria-hidden="true">✓</span><h3>You’re signed in</h3><p id="auth-session-email"></p><a class="auth-primary" id="auth-continue" href="index.html">Continue to the app →</a><button class="auth-text-button" id="auth-signout" type="button">Sign out / use another account</button></div>
+        <form id="auth-form" novalidate>
+          <fieldset id="auth-fields" disabled>
+            <legend class="auth-sr-only">Account credentials</legend>
+            <label for="auth-email">Email address</label><input id="auth-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required />
+            <div class="auth-label-row"><label for="auth-password">Password</label><a id="auth-forgot" href="forgot-password.html">Forgot password?</a></div>
+            <div class="auth-password-wrap"><input id="auth-password" name="password" type="password" autocomplete="current-password" required /><button type="button" data-password-toggle="auth-password" aria-label="Show password" aria-pressed="false">Show</button></div>
+            <p class="auth-help" id="auth-password-help" hidden>Use at least 8 characters. A unique passphrase works well.</p>
+            <div id="auth-confirm-wrap" hidden><label for="auth-confirm">Confirm password</label><div class="auth-password-wrap"><input id="auth-confirm" name="password-confirmation" type="password" autocomplete="new-password" disabled /><button type="button" data-password-toggle="auth-confirm" aria-label="Show confirmation password" aria-pressed="false">Show</button></div></div>
+            <button class="auth-primary" id="auth-submit" type="submit">Sign in →</button>
+            <p class="auth-switch"><span id="auth-switch-copy">New around here?</span> <button class="auth-text-button" id="auth-mode" type="button">Create an account</button></p>
+          </fieldset>
+        </form>
+        <p class="auth-trust">Authentication by Supabase.<br />Your media stays in Cloudinary.</p>
+        <noscript><p class="auth-message">Enable JavaScript to sign in securely with Supabase.</p></noscript>
+      </section>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script><script src="auth-service.js"></script><script src="auth-page.js"></script>
+  </body>
+</html>

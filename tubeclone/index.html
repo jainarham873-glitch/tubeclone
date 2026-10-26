@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script>document.documentElement.classList.add('auth-gate-pending');</script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0f0f0f" />
+    <meta name="description" content="A polished YouTube-style video discovery app." />
+    <title>TUBECLONE — Watch, discover, share</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="topbar__left">
+          <button class="icon-button menu-button" type="button" aria-label="Open navigation" data-action="toggle-sidebar">
+            <span class="icon icon--menu">☰</span>
+          </button>
+          <a class="brand" href="#" aria-label="YouTube home" data-action="home">
+            <span class="brand__mark"><span></span></span>
+            <span class="brand__name">TUBECLONE</span>
+          </a>
+        </div>
+
+        <form class="searchbar" id="search-form" role="search">
+          <input id="search-input" type="search" placeholder="Search" autocomplete="off" aria-label="Search videos" />
+          <button class="searchbar__button" type="submit" aria-label="Search">⌕</button>
+          <button class="icon-button voice-button" type="button" aria-label="Search with your voice" data-action="voice-search">●</button>
+        </form>
+
+        <div class="topbar__right">
+          <a class="icon-button" href="upload.html" aria-label="Create an upload" title="Upload">＋</a>
+          <div class="notifications-wrap">
+            <button class="icon-button" type="button" aria-label="Notifications" data-action="toggle-notifications" aria-expanded="false">♧<span class="notification-dot" id="notification-dot"></span></button>
+            <div class="notifications-panel" id="notifications-panel" hidden>
+              <div class="notifications-panel__header"><strong>Notifications</strong><button type="button" data-action="mark-notifications-read">Mark all read</button></div>
+              <div class="notifications-list" id="notifications-list"></div>
+            </div>
+          </div>
+          <button class="avatar avatar--small" type="button" aria-label="Open account menu" data-action="account">A</button>
+        </div>
+      </header>
+
+      <aside class="sidebar" id="sidebar" aria-label="Primary navigation">
+        <nav class="sidebar__nav">
+          <a class="nav-item nav-item--active" href="index.html" data-nav="Home"><span class="nav-item__icon">⌂</span><span>Home</span></a>
+          <a class="nav-item" href="shorts.html" data-nav="Shorts"><span class="nav-item__icon">▹</span><span>Shorts</span></a>
+          <a class="nav-item" href="subscriptions.html" data-nav="Subscriptions"><span class="nav-item__icon">▣</span><span>Subscriptions</span></a>
+        </nav>
+        <div class="sidebar__divider"></div>
+        <div class="sidebar__section">
+          <p class="sidebar__label">You <span class="sidebar__arrow">›</span></p>
+          <a class="nav-item" href="history.html" data-nav="History"><span class="nav-item__icon">◷</span><span>History</span></a>
+          <a class="nav-item" href="playlists.html" data-nav="Playlists"><span class="nav-item__icon">☷</span><span>Playlists</span></a>
+          <a class="nav-item" href="watch-later.html" data-nav="Watch later"><span class="nav-item__icon">◴</span><span>Watch later</span></a>
+          <a class="nav-item" href="liked.html" data-nav="Liked videos"><span class="nav-item__icon">♡</span><span>Liked videos</span></a>
+        </div>
+        <div class="sidebar__divider"></div>
+        <div class="sidebar__section">
+          <p class="sidebar__label">Explore</p>
+          <a class="nav-item" href="index.html#trending" data-nav="Trending"><span class="nav-item__icon">⌁</span><span>Trending</span></a>
+          <a class="nav-item" href="index.html?category=Music" data-nav="Music"><span class="nav-item__icon">♫</span><span>Music</span></a>
+          <a class="nav-item" href="index.html?category=Movies%20%26%20TV" data-nav="Movies & TV"><span class="nav-item__icon">▤</span><span>Movies & TV</span></a>
+          <a class="nav-item" href="index.html?category=Live" data-nav="Live"><span class="nav-item__icon">◉</span><span>Live</span></a>
+          <a class="nav-item" href="index.html?category=Gaming" data-nav="Gaming"><span class="nav-item__icon">⌘</span><span>Gaming</span></a>
+          <a class="nav-item" href="index.html?category=News" data-nav="News"><span class="nav-item__icon">▥</span><span>News</span></a>
+          <a class="nav-item" href="index.html?category=Sports" data-nav="Sports"><span class="nav-item__icon">◌</span><span>Sports</span></a>
+          <a class="nav-item" href="index.html?category=Learning" data-nav="Learning"><span class="nav-item__icon">✎</span><span>Learning</span></a>
+          <a class="nav-item" href="index.html?category=Fashion%20%26%20Beauty" data-nav="Fashion & Beauty"><span class="nav-item__icon">✧</span><span>Fashion &amp; Beauty</span></a>
+        </div>
+        <div class="sidebar__divider"></div>
+        <div class="sidebar__section">
+          <p class="sidebar__label">More from Tubeclone</p>
+          <a class="nav-item" href="index.html?search=Premium"><span class="nav-item__icon">✦</span><span>Tubeclone Premium</span></a>
+          <a class="nav-item" href="index.html?category=Music"><span class="nav-item__icon">♫</span><span>Tubeclone Music</span></a>
+          <a class="nav-item" href="shorts.html"><span class="nav-item__icon">▹</span><span>Tubeclone Shorts</span></a>
+        </div>
+        <div class="sidebar__divider"></div>
+        <div class="sidebar__section">
+          <a class="nav-item" href="account.html"><span class="nav-item__icon">⚙</span><span>Settings</span></a>
+          <a class="nav-item" href="history.html"><span class="nav-item__icon">◷</span><span>Report history</span></a>
+          <a class="nav-item" href="mailto:feedback@tubeclone.local"><span class="nav-item__icon">✉</span><span>Send feedback</span></a>
+        </div>
+      </aside>
+
+      <main class="main-content" id="main-content">
+        <div class="category-row" id="category-row" aria-label="Video categories"></div>
+
+        <section class="watch-page" id="watch-page" hidden>
+          <button class="back-button" type="button" data-action="back-feed">← Back to feed</button>
+          <div class="watch-page__layout">
+            <article class="watch-page__main">
+              <div class="watch-player watch-player--page" id="watch-page-player"></div>
+              <div class="watch-page__info">
+                <p class="watch-modal__category" id="watch-page-category"></p>
+                <h1 id="watch-page-title"></h1>
+                <p class="watch-page__meta" id="watch-page-meta"></p>
+                <p class="watch-modal__description" id="watch-page-description"></p>
+                <div class="watch-modal__actions">
+                  <button class="pill-button" id="watch-page-like-button" type="button" data-action="like-active">♡ <span id="watch-page-like-label">Like</span></button>
+                  <button class="pill-button" id="watch-page-save-button" type="button" data-action="save-active">▱ <span id="watch-page-save-label">Save</span></button>
+                  <button class="pill-button" type="button" data-action="share-active">↗ Share</button>
+                </div>
+                <div class="watch-playlist-add">
+                  <select id="watch-playlist-select" aria-label="Choose a playlist"><option value="">Add to playlist</option></select>
+                  <button class="pill-button" type="button" data-action="add-playlist-active">Add</button>
+                </div>
+                <div class="watch-management" id="watch-page-management" hidden></div>
+                <div class="watch-page__channel">
+                  <button class="avatar" id="watch-page-avatar" type="button" data-action="channel" aria-label="Open channel">M</button>
+                  <button class="watch-page__channel-copy" type="button" data-action="channel">
+                    <strong id="watch-page-channel-name"></strong>
+                    <span id="watch-page-subs"></span>
+                  </button>
+                  <button class="subscribe-button" type="button" data-action="subscribe-active" id="watch-page-subscribe-button">Subscribe</button>
+                </div>
+              </div>
+
+              <section class="comments-section" aria-labelledby="comments-title">
+                <div class="comments-heading"><div class="comments-heading__title"><h2 id="comments-title">Comments</h2><span id="comments-count">0</span></div><button class="comments-toggle" id="comments-toggle" type="button" data-action="toggle-comments" aria-expanded="true"><span>Hide comments</span><b aria-hidden="true">⌃</b></button></div>
+                <div class="comment-replying" id="comment-replying" hidden><span id="comment-replying-text"></span><button class="comment-replying__cancel" type="button" data-action="cancel-reply">Cancel</button></div>
+                <form id="comment-form" class="comment-form">
+                  <span class="avatar avatar--small">A</span>
+                  <textarea id="comment-input" rows="1" maxlength="1000" placeholder="Add a comment..." required></textarea>
+                  <button class="primary-button" type="submit">Comment</button>
+                </form>
+                <div class="comments-list" id="comments-list"></div>
+              </section>
+            </article>
+            <aside class="watch-page__sidebar">
+              <p class="section-heading__overline">Up next</p>
+              <div class="watch-recommendations" id="watch-recommendations"></div>
+            </aside>
+          </div>
+        </section>
+
+        <section class="channel-page" id="channel-page" hidden>
+          <button class="back-button" type="button" data-action="back-feed">← Back to feed</button>
+          <div class="channel-cover"></div>
+          <div class="channel-header">
+            <span class="avatar channel-header__avatar" id="channel-page-avatar">M</span>
+            <div class="channel-header__copy">
+              <p class="watch-modal__category">Channel</p>
+              <h1 id="channel-page-name">Creator</h1>
+              <p id="channel-page-meta">Creator channel</p>
+            </div>
+            <button class="subscribe-button" type="button" data-action="subscribe-channel" id="channel-page-subscribe">Subscribe</button>
+          </div>
+          <div class="channel-tabs" role="tablist">
+            <button class="channel-tab channel-tab--active" type="button" data-channel-tab="Videos">Videos</button>
+            <button class="channel-tab" type="button" data-channel-tab="About">About</button>
+          </div>
+          <div class="channel-content" id="channel-content"></div>
+        </section>
+
+        <section class="playlists-page" id="playlists-page" hidden>
+          <button class="back-button" type="button" data-action="back-feed">← Back to feed</button>
+          <div class="section-heading">
+            <div><p class="section-heading__overline">Your library</p><h1 id="playlists-title">Playlists</h1></div>
+          </div>
+          <form class="playlist-create-form" id="playlist-create-form">
+            <input id="playlist-name" type="text" maxlength="80" placeholder="New playlist name" required />
+            <select id="playlist-privacy" aria-label="Playlist privacy"><option value="private">Private</option><option value="public">Public</option></select>
+            <button class="primary-button" type="submit">Create playlist</button>
+          </form>
+          <div id="playlist-content"></div>
+        </section>
+
+        <section class="studio-page" id="studio-page" hidden>
+          <button class="back-button" type="button" data-action="back-feed">← Back to feed</button>
+          <div class="studio-header"><div><p class="section-heading__overline">Creator tools</p><h1>Creator Studio</h1><p>Manage your videos and publishing workflow.</p></div><a class="primary-button" href="upload.html">＋ Upload</a></div>
+          <div class="studio-stats" id="studio-stats"></div>
+          <div class="section-heading studio-list-heading"><div><p class="section-heading__overline">Your content</p><h2>Videos</h2></div></div>
+          <div class="studio-video-list" id="studio-video-list"></div>
+        </section>
+
+        <section class="hero-banner" id="hero-banner" aria-label="Featured creator">
+          <div class="hero-banner__glow"></div>
+          <div class="hero-banner__copy">
+            <span class="eyebrow" id="hero-eyebrow">Music spotlight</span>
+            <h1><span id="hero-title">Find your next</span><br /><em id="hero-emphasis">favorite sound.</em></h1>
+            <p id="hero-description">Fresh tracks, live sessions, and mixes picked for your mood.</p>
+            <button class="primary-button" type="button" data-action="explore"><span id="hero-action-label">Explore Music</span> <span>→</span></button>
+          </div>
+          <div class="hero-banner__art" aria-hidden="true">
+            <div class="orb orb--one"></div><div class="orb orb--two"></div><div class="hero-banner__sun"></div>
+            <div class="hero-banner__mountain hero-banner__mountain--back"></div>
+            <div class="hero-banner__mountain hero-banner__mountain--front"></div>
+            <div class="hero-banner__person"></div>
+          </div>
+          <button class="hero-banner__dismiss" type="button" aria-label="Dismiss banner" data-action="dismiss-banner">×</button>
+        </section>
+
+        <section class="feed-section" id="feed-section" aria-labelledby="feed-title">
+          <div class="section-heading">
+            <div>
+              <p class="section-heading__overline" id="feed-overline">Recommended for you</p>
+              <h2 id="feed-title">Fresh picks</h2>
+            </div>
+            <button class="text-button" type="button" data-action="refresh">Refresh <span>↻</span></button>
+          </div>
+          <div class="video-grid" id="video-grid" aria-live="polite"></div>
+          <div class="empty-state" id="empty-state" hidden>
+            <div class="empty-state__icon">⌕</div>
+            <h3>No videos found</h3>
+            <p>Try a different search term or category.</p>
+            <button class="secondary-button" type="button" data-action="clear-search">Clear search</button>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <nav class="mobile-bottom-nav" id="mobile-bottom-nav" aria-label="Mobile navigation">
+      <button class="mobile-bottom-nav__item mobile-bottom-nav__item--active" type="button" data-mobile-nav="Home"><span>⌂</span><small>Home</small></button>
+      <button class="mobile-bottom-nav__item" type="button" data-mobile-nav="Shorts"><span>▹</span><small>Shorts</small></button>
+      <button class="mobile-bottom-nav__item" type="button" data-mobile-nav="Subscriptions"><span>▣</span><small>Subscriptions</small></button>
+      <button class="mobile-bottom-nav__item" type="button" data-mobile-nav="Playlists"><span>☷</span><small>Library</small></button>
+      <a class="mobile-bottom-nav__item" href="account.html" data-mobile-nav="Account"><span>◎</span><small>Account</small></a>
+    </nav>
+
+    <div class="account-drawer-backdrop" id="account-drawer-backdrop" hidden></div>
+    <aside class="account-drawer" id="account-drawer" aria-label="Account menu" aria-hidden="true">
+      <div class="account-drawer__header"><div><p class="section-heading__overline">Your account</p><h2>Account menu</h2></div><button class="modal-close" type="button" aria-label="Close account menu" data-action="close-account">×</button></div>
+      <div class="account-drawer__profile"><span class="avatar avatar--drawer" id="drawer-avatar">A</span><div><strong id="drawer-name">Welcome</strong><span id="drawer-email">Sign in to customize your account</span></div></div>
+       <div class="account-drawer__actions"><a class="account-drawer__item" href="account.html"><span>◎</span><div><strong>Your account</strong><small>Profile, avatar, and preferences</small></div><b>›</b></a><a class="account-drawer__item" href="studio.html"><span>✦</span><div><strong>Creator Studio</strong><small>Edit, delete, pin, and manage videos</small></div><b>›</b></a><a class="account-drawer__item" id="admin-drawer-item" href="admin.html" hidden><span>◆</span><div><strong>Admin Console</strong><small>Moderate videos, comments, and requests</small></div><b>›</b></a><a class="account-drawer__item" href="history.html"><span>◷</span><div><strong>History</strong><small>Videos you watched</small></div><b>›</b></a><a class="account-drawer__item" href="playlists.html"><span>☷</span><div><strong>Playlists</strong><small>Organize your library</small></div><b>›</b></a></div>
+      <button class="account-drawer__signout" type="button" data-action="drawer-auth" id="drawer-auth-button">Sign in</button>
+      <p class="account-drawer__note">Account permissions are enforced by Supabase RLS. UI controls are not a security boundary.</p>
+    </aside>
+
+    <div class="modal-backdrop" id="watch-modal" hidden>
+      <section class="watch-modal" role="dialog" aria-modal="true" aria-labelledby="watch-title">
+        <button class="modal-close" type="button" aria-label="Close video" data-action="close-watch">×</button>
+        <div class="watch-player" id="watch-player"></div>
+        <div class="watch-modal__body">
+          <div class="watch-modal__main">
+            <p class="watch-modal__category" id="watch-category"></p>
+            <h2 id="watch-title"></h2>
+            <p class="watch-modal__meta" id="watch-meta"></p>
+            <p class="watch-modal__description" id="watch-description"></p>
+            <div class="watch-modal__actions">
+              <button class="pill-button" id="watch-modal-like-button" type="button" data-action="like-active">♡ <span id="like-label">Like</span></button>
+              <button class="pill-button" id="watch-modal-save-button" type="button" data-action="save-active">▱ <span id="watch-modal-save-label">Save</span></button>
+              <button class="pill-button" type="button" data-action="share-active">↗ Share</button>
+            </div>
+          </div>
+          <div class="watch-channel">
+            <span class="avatar" id="watch-avatar">M</span>
+            <div><strong id="watch-channel-name"></strong><span id="watch-subs"></span></div>
+            <button class="subscribe-button" type="button" data-action="subscribe-active" id="subscribe-button">Subscribe</button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
+    <script src="auth-service.js"></script>
+    <script src="auth-gate.js"></script>
+    <script src="video-records.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

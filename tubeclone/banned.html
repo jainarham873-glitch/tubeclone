@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Account restricted — Tubeclone</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="restricted-page">
+      <div class="restricted-page__card">
+        <span class="restricted-page__icon">!</span>
+        <p class="section-heading__overline">Account restricted</p>
+        <h1 id="banned-title">Your Tubeclone access is paused.</h1>
+        <p id="banned-copy">An administrator placed a temporary or permanent restriction on this account.</p>
+        <div class="banned-countdown" id="banned-countdown" aria-live="polite">Checking ban details…</div>
+        <p class="banned-expiry" id="banned-expiry"></p>
+        <p class="banned-reason" id="banned-reason"></p>
+        <div class="restricted-page__actions"><button class="secondary-button" id="banned-signout" type="button">Sign out</button><a class="primary-button" href="login.html">Return to sign in</a></div>
+      </div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
+    <script src="auth-service.js"></script>
+    <script src="banned-page.js"></script>
+  </body>
+</html>

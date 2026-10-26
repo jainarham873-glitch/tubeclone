@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script>document.documentElement.classList.add('auth-gate-pending');</script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0f0f0f" />
+    <meta name="description" content="Upload, preview, and publish to your Tubeclone channel." />
+    <title>Upload — Tubeclone Studio</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="upload-page.css" />
+  </head>
+  <body class="upload-screen">
+    <a class="upload-skip" href="#upload-main">Skip to upload</a>
+    <header class="topbar upload-topbar">
+      <a class="brand" href="index.html" aria-label="Tubeclone home">
+        <span class="brand__mark"><span></span></span>
+        <span class="brand__name">TUBECLONE</span><span class="upload-studio-label">STUDIO</span>
+      </a>
+      <nav aria-label="Creator navigation"><a href="studio.html">← Back to Studio</a><a class="avatar avatar--small" id="upload-avatar" href="account.html" aria-label="Your account">A</a></nav>
+    </header>
+
+    <main class="upload-workspace" id="upload-main">
+      <header class="upload-heading">
+        <div><p class="section-heading__overline">CREATE SOMETHING WORTH SHARING</p><h1>Upload your next story<span>.</span></h1><p>A video, a track, or something entirely new. Make it yours.</p></div>
+        <span class="upload-provider" id="upload-provider">Preparing upload…</span>
+      </header>
+
+      <section class="upload-account" aria-label="Publishing account">
+        <div><strong id="upload-account-label">Checking your account…</strong><p id="upload-account-hint">Your existing Supabase session works here too.</p></div>
+        <button class="upload-button upload-button--quiet" type="button" id="upload-signin-toggle" aria-expanded="false" aria-controls="upload-auth" hidden>Sign in</button>
+      </section>
+      <section class="upload-auth" id="upload-auth" aria-labelledby="upload-auth-title" hidden>
+        <h2 id="upload-auth-title">Sign in to publish</h2>
+        <p>Sign in securely with Supabase. Cloudinary only stores files; it does not manage your login. Your selected files stay here while you sign in.</p>
+        <form id="upload-auth-form">
+          <label>Email<input id="upload-email" type="email" autocomplete="email" required /></label>
+          <label>Password<input id="upload-password" type="password" autocomplete="current-password" required /></label>
+          <label id="upload-confirm-label" hidden>Confirm password<input id="upload-confirm-password" type="password" autocomplete="new-password" disabled /></label>
+          <button class="upload-button" id="upload-auth-submit" type="submit">Sign in</button>
+        </form>
+        <button class="upload-text-button" type="button" id="upload-auth-mode">New here? Create an account</button>
+        <p><a class="upload-text-button" href="forgot-password.html" target="_blank" rel="noopener noreferrer">Forgot password? (opens a new tab)</a></p>
+        <p>Keep this upload tab open while resetting your password. Your selected files are not saved across a reload.</p>
+        <p id="upload-auth-message" role="status"></p>
+      </section>
+
+      <ol class="upload-steps" aria-label="Upload steps">
+        <li id="step-file" aria-current="step"><span>1</span><div><strong>Select a file</strong><small>Start with your original</small></div></li>
+        <li id="step-details"><span>2</span><div><strong>Add details</strong><small>Set the scene</small></div></li>
+        <li id="step-review"><span>3</span><div><strong>Review &amp; publish</strong><small>Ready for your audience</small></div></li>
+      </ol>
+      <p class="upload-feedback" id="upload-feedback" role="alert" tabindex="-1" hidden></p>
+      <noscript><p class="upload-feedback">JavaScript is needed to preview files, sign in, and publish.</p></noscript>
+
+      <form id="upload-form" novalidate>
+        <fieldset id="upload-fields" disabled>
+          <legend class="upload-sr-only">Upload details</legend>
+          <div class="upload-columns">
+            <div class="upload-editor">
+              <section id="upload-details" class="upload-panel" aria-labelledby="upload-details-title">
+                <div class="upload-panel-heading"><div><h2 id="upload-details-title" tabindex="-1">The details</h2><p>Nothing is uploaded until you choose Publish.</p></div><span>01 / 02</span></div>
+                <input id="upload-file" type="file" hidden />
+                <div id="upload-dropzone" class="upload-dropzone">
+                  <span class="upload-drop-icon" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none"><path d="M24 31V9m-8 8 8-8 8 8M10 30v9h28v-9" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" /></svg></span>
+                  <h3>Drag &amp; drop your file here</h3><p>or choose one from your device</p>
+                  <button class="upload-button" id="upload-choose" type="button">Select a file <span aria-hidden="true">↑</span></button>
+                  <small id="upload-file-limits">Loading file limits…</small>
+                </div>
+                <div class="upload-selected" id="upload-selected" hidden>
+                  <span class="upload-file-icon" aria-hidden="true">↥</span><div><strong id="upload-file-name"></strong><small id="upload-file-meta"></small></div>
+                  <button class="upload-text-button" id="upload-replace" type="button">Replace</button><button class="upload-icon-button" id="upload-remove" type="button" aria-label="Remove selected file">×</button>
+                </div>
+                <label class="upload-field" for="upload-title"><span>Title <small>(required)</small></span><input id="upload-title" maxlength="100" required placeholder="Give your upload a title" aria-describedby="upload-title-count" /><small class="upload-counter" id="upload-title-count">0 / 100</small></label>
+                <label class="upload-field" for="upload-description"><span>Description <small>(optional)</small></span><textarea id="upload-description" rows="5" maxlength="5000" placeholder="Tell your audience a little more. What makes this worth watching?" aria-describedby="upload-description-count"></textarea><small class="upload-counter" id="upload-description-count">0 / 5000</small></label>
+                <label class="upload-field" for="upload-category"><span>Category</span><select id="upload-category" required></select></label>
+                <div class="upload-thumbnail-heading"><div><h3>Thumbnail</h3><p>Give your upload a first impression.</p></div><small>Optional</small></div>
+                <input id="upload-thumbnail" type="file" accept="image/*" hidden />
+                <div class="upload-thumbnail-row">
+                  <button class="upload-thumbnail-button" type="button" id="upload-choose-thumbnail" aria-label="Choose thumbnail"><span aria-hidden="true">＋</span><span id="upload-thumbnail-label">Upload thumbnail</span></button>
+                  <div><p id="upload-thumbnail-limits">Loading image limits…</p><button type="button" class="upload-text-button" id="upload-remove-thumbnail" hidden>Remove thumbnail</button></div>
+                </div>
+              </section>
+              <section class="upload-panel upload-review" id="upload-review" aria-labelledby="upload-review-title" hidden>
+                <div class="upload-panel-heading"><div><h2 id="upload-review-title" tabindex="-1">Ready to share?</h2><p>One last look before your upload goes live.</p></div><span>02 / 02</span></div>
+                <h3 id="upload-review-name"></h3><p id="upload-review-description"></p>
+                <dl class="upload-summary"><div><dt>File</dt><dd id="upload-review-file"></dd></div><div><dt>Category</dt><dd id="upload-review-category"></dd></div><div><dt>Destination</dt><dd id="upload-review-provider"></dd></div></dl>
+                <div class="upload-visibility"><span aria-hidden="true">◎</span><div><strong>Public</strong><p>Anyone can view or download this upload. Private publishing is not supported.</p></div><span class="upload-visibility-check" aria-hidden="true">✓</span></div>
+                <label class="upload-confirm"><input id="upload-public-confirm" type="checkbox" /><span>I have permission to share this file and understand it will be public.</span></label>
+                <p class="upload-small-note">Files stay on your device until you press Publish. Keep this page open while the upload completes.</p>
+              </section>
+            </div>
+            <aside class="upload-preview-column" aria-label="Upload preview">
+              <section class="upload-preview-card">
+                <div class="upload-preview-heading"><strong>Preview</strong><span>ONLY YOU CAN SEE THIS</span></div>
+                <div id="upload-preview" class="upload-preview"><span>No file selected yet</span></div>
+                <p class="upload-preview-note" id="upload-preview-note">Select a file to preview it here.</p>
+                <div class="upload-preview-copy"><span class="upload-preview-tag" id="upload-preview-category">Other</span><h3 id="upload-preview-title">Your next great upload</h3><p id="upload-preview-channel">Your channel</p></div>
+                <dl class="upload-preview-facts"><div><dt>File size</dt><dd id="upload-preview-size">—</dd></div><div><dt>Visibility</dt><dd>Public on publish</dd></div></dl>
+              </section>
+              <section class="upload-tips"><span aria-hidden="true">✦</span><div><h3>A little polish goes a long way.</h3><p>Keep your title clear, add a useful description, and choose a thumbnail that tells the story.</p></div></section>
+              <p class="upload-storage-note" id="upload-storage-note"></p>
+            </aside>
+          </div>
+          <footer class="upload-footer">
+            <p><span aria-hidden="true">◉</span> <span id="upload-footer-note">Your file stays local until you publish.</span></p>
+            <div><button class="upload-button upload-button--quiet" id="upload-back" type="button" hidden>← Edit details</button><button class="upload-button" id="upload-next" type="submit">Review upload <span aria-hidden="true">→</span></button><button class="upload-button" id="upload-publish" type="submit" hidden>Publish</button></div>
+          </footer>
+        </fieldset>
+      </form>
+      <section class="upload-progress-panel" id="upload-progress-panel" aria-labelledby="upload-status" hidden>
+        <div><span class="upload-spinner" id="upload-spinner" aria-hidden="true"></span><h2 id="upload-status" role="status" aria-live="polite">Preparing upload…</h2><span id="upload-percent"></span></div>
+        <progress id="upload-progress" max="100" aria-labelledby="upload-status"></progress>
+        <p id="upload-progress-note">Keep this page open. Progress is reported by the upload service.</p>
+      </section>
+      <section class="upload-success upload-panel" id="upload-success" aria-labelledby="upload-success-title" hidden>
+        <span class="upload-success-icon" aria-hidden="true">✓</span><p class="section-heading__overline">ALL SET</p><h2 id="upload-success-title" tabindex="-1">Your upload is published.</h2><p id="upload-success-name"></p>
+        <div><a class="upload-button" id="upload-view" href="index.html">View upload ↗</a><a class="upload-button upload-button--quiet" href="studio.html">Manage in Studio</a><button class="upload-text-button" id="upload-another" type="button">Upload another</button></div>
+      </section>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
+    <script src="auth-service.js"></script>
+    <script src="auth-gate.js"></script>
+    <script src="video-records.js"></script>
+    <script src="upload-service.js"></script>
+    <script src="cloudinary-config.js"></script>
+    <script src="cloudinary-service.js"></script>
+    <script src="upload-page.js"></script>
+  </body>
+</html>

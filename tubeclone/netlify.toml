@@ -1,0 +1,6 @@
+[build]
+  publish = "."
+
+# This is a dependency-free static site. Netlify serves the HTML files directly;
+# there is no build command and no SPA fallback needed because the app uses
+# separate .html entry points.
